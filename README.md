@@ -1,1 +1,1 @@
-# tom-selleck
+# TODO: give readme meaningful information
