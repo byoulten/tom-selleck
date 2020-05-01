@@ -1,3 +1,6 @@
+# Prerequisites
+NodeJS v 12.16.3 - https://nodejs.org/en/download/
+
 # Setup
 
 1) Clone the repo to /tom-selleck
