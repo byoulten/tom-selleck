@@ -1,5 +1,5 @@
 # Prerequisites
-NodeJS v 12.16.3 - https://nodejs.org/en/download/
+NodeJS v >= 12.16.3 - https://nodejs.org/en/download/
 
 # Setup
 
