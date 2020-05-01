@@ -1,10 +1,10 @@
 # Setup
 
-1) Clone the repo to <projects dir>/tom-selleck
+1) Clone the repo to /tom-selleck
   
 2) Initialize submodules (server and client) > git submodule update --init --recursive 
 
-3) Navigate to <projects dir>/tom-selleck/server
+3) Navigate to /tom-selleck/server
   
 4) Run > npm install
 
@@ -12,7 +12,7 @@
 
 6) Navigate to http://localhost:9000 to confirm the server is running
 
-7) Navigate to <projects dir>/tom-selleck/client
+7) Navigate to /tom-selleck/client
   
 8) Run > npm install
 
