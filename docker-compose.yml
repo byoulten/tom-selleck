@@ -16,3 +16,16 @@ services:
     container_name: tom-selleck-server
     ports: 
         - '9000:9000'
+  database:
+    build:
+        context: ./database
+    container_name: tom-selleck-database
+    ports: 
+        - '27017:27107'
+  index:
+    build:
+        context: ./index
+    container_name: tom-selleck-index
+    ports: 
+        - '8983:8983'
+
