@@ -1,5 +1,10 @@
 # Prerequisites
-NodeJS v >= 12.16.3 - https://nodejs.org/en/download/
+Install Docker and Docker Compose 
+
+https://docs.docker.com/get-docker/
+
+https://docs.docker.com/compose/
+
 
 # Setup
 
@@ -7,18 +12,10 @@ NodeJS v >= 12.16.3 - https://nodejs.org/en/download/
   
 2) Initialize submodules (server and client) > git submodule update --init --recursive 
 
-3) Navigate to /tom-selleck/server
-  
-4) Run > npm install
+3) Navigate to /tom-selleck
 
-5) Run npm start 
+4) Build the docker containers > docker-compose build
 
-6) Navigate to http://localhost:9000 to confirm the server is running
+5) Run the docker containers > docker-compose up
 
-7) Navigate to /tom-selleck/client
-  
-8) Run > npm install
-
-9) Run npm start 
-
-10) Navigate to http://localhost:3000 to confirm the client is running
+6) Verify that the server and client are up and running (on localhost:9000 and localhost:3000 respectively)
