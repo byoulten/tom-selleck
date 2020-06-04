@@ -26,6 +26,10 @@ services:
     build:
         context: ./index
     container_name: tom-selleck-index
+    entrypoint:
+        - bash
+        - "-c"
+        - "precreate-core bens_test_core; exec solr -f"
     ports: 
         - '8983:8983'
 
