@@ -1,21 +1,7 @@
 version: '3'
 
 services:
-  client:
-    build:
-        context: './client'
-    container_name: tom-selleck-client
-    ports: 
-        - '3000:3000'
-    stdin_open: true
-    depends_on: 
-      - server
-  server:
-    build:
-        context: ./server
-    container_name: tom-selleck-server
-    ports: 
-        - '9000:9000'
+  
   database:
     build:
         context: ./database
@@ -32,4 +18,22 @@ services:
         - "precreate-core bens_test_core; exec solr -f"
     ports: 
         - '8983:8983'
+  server:
+    build:
+        context: ./server
+    container_name: tom-selleck-server
+    ports: 
+        - '9000:9000'
+    depends_on: 
+        - database
+        - index
+  client:
+    build:
+        context: './client'
+    container_name: tom-selleck-client
+    ports: 
+        - '3000:3000'
+    stdin_open: true
+    depends_on: 
+        - server
 
