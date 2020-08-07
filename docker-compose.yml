@@ -15,7 +15,7 @@ services:
     entrypoint:
         - bash
         - "-c"
-        - "precreate-core bens_test_core; exec solr -f"
+        - "precreate-core tom_selleck_core; exec solr -f"
     ports: 
         - '8983:8983'
   server:
