@@ -32,6 +32,8 @@ services:
         - index
   client:
     image: byoulten/tom-selleck-client
+    labels:
+        kompose.service.type: NodePort
     build:
         context: './client'
     container_name: tom-selleck-client
