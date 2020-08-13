@@ -3,12 +3,14 @@ version: '3'
 services:
   
   database:
+    image: byoulten/tom-selleck-database
     build:
         context: ./database
     container_name: tom-selleck-database
     ports: 
         - '27017:27107'
   index:
+    image: byoulten/tom-selleck-index
     build:
         context: ./index
     container_name: tom-selleck-index
@@ -19,6 +21,7 @@ services:
     ports: 
         - '8983:8983'
   server:
+    image: byoulten/tom-selleck-server
     build:
         context: ./server
     container_name: tom-selleck-server
@@ -28,6 +31,7 @@ services:
         - database
         - index
   client:
+    image: byoulten/tom-selleck-client
     build:
         context: './client'
     container_name: tom-selleck-client
