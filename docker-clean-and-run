@@ -4,6 +4,6 @@ cd ..
 docker stop $(docker ps -aq)
 docker container prune
 docker volume prune
-export ENVIRONMENT=dev
+export ENVIRONMENT=dev 
 docker-compose build
 docker-compose up
