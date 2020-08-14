@@ -1,9 +1,18 @@
+cd server
+npm run tsc
+cd ..
+docker stop $(docker ps -aq)
+docker container prune
+docker volume prune
+export ENVIRONMENT=production
+docker-compose build
+
 kind delete cluster
 kind create cluster
 kubectl cluster-info --context kind-kind
-rm ./deployements/*
+rm ./deployments/*
 kompose convert -o deployments && kubectl apply -f ./deployments
 kubectl get deployment,svc,pods,pvc
 
-#when client pod is running, execute kubectl port-forward service/client 8080:3000 and go to localhost:8080 to view site
+#when client pod is running, execute kubectl port-forward service/client 3000:3000 and go to localhost:8080 to view site
 

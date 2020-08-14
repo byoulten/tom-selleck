@@ -21,7 +21,11 @@ services:
     ports: 
         - '8983:8983'
   server:
+    env_file:
+        - server/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-server
+    labels:
+        kompose.service.type: NodePort
     build:
         context: ./server
     container_name: tom-selleck-server
@@ -31,6 +35,8 @@ services:
         - database
         - index
   client:
+    env_file:
+        - client/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-client
     labels:
         kompose.service.type: NodePort
