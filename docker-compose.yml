@@ -3,6 +3,8 @@ version: '3'
 services:
   
   database:
+    env_file:
+        - database/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-database
     build:
         context: ./database
@@ -10,6 +12,8 @@ services:
     ports: 
         - '27017:27107'
   index:
+    env_file:
+        - index/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-index
     build:
         context: ./index

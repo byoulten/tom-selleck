@@ -6,5 +6,5 @@ export ENVIRONMENT=prod
 kompose convert -o deployments && kubectl apply -f ./deployments
 kubectl get deployment,svc,pods,pvc
 
-#when client pod is running, execute kubectl port-forward service/client 3000:3000 and go to localhost:8080 to view site
+#when client pod is running, execute kubectl port-forward service/client 3000:3000 and go to localhost:3000 to view site
 
