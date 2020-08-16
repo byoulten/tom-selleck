@@ -11,10 +11,6 @@ services:
     container_name: tom-selleck-database
     ports: 
         - '27017:27107'
-    entrypoint:
-      - "mongod"
-      - "--bind_ip"
-      - "0.0.0.0"
   index:
     env_file:
         - index/.env.${ENVIRONMENT}

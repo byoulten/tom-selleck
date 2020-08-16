@@ -13,15 +13,17 @@ kubectl create clusterrolebinding k8dash-sa --clusterrole=cluster-admin --servic
 
 kubectl get deployment,svc,pods,pvc --all-namespaces
 
+#to get secret for auth login of k8dash
+
+#kubectl get secrets
+#kubectl describe secret k8dash-sa-token-xxxx
+
 #when client pod is running, execute (each in their own terminal)
 
 #kubectl port-forward service/client 3000:3000 
 #kubectl port-forward service/server 9000:9000 
 #kubectl port-forward service/k8dash 9999:80 -n kube-system
 
-#to get secret for auth login of k8dash
 
-#kubectl get secrets
-#kubectl describe secret k8dash-sa-token-xxxx
 
 
