@@ -4,7 +4,25 @@ kubectl cluster-info --context kind-kind
 rm ./deployments/*
 export ENVIRONMENT=prod
 kompose convert -o deployments && kubectl apply -f ./deployments
-kubectl get deployment,svc,pods,pvc
 
-#when client pod is running, execute kubectl port-forward service/client 3000:3000 and go to localhost:3000 to view site
+#automatically install a dashboard
+kubectl apply -f https://raw.githubusercontent.com/herbrandson/k8dash/master/kubernetes-k8dash.yaml
 
+kubectl get deployment,svc,pods,pvc --all-namespaces
+
+#when client pod is running, execute (each in their own terminal)
+
+#kubectl port-forward service/client 3000:3000 
+#kubectl port-forward service/server 9000:9000 
+
+#and go to localhost:3000 to view site
+
+#to get secret for auth login of k8dash
+
+kubectl create serviceaccount k8dash-sa
+kubectl create clusterrolebinding k8dash-sa --clusterrole=cluster-admin --serviceaccount=default:k8dash-sa
+
+#kubectl get secrets
+#kubectl describe secret k8dash-sa-token-xxxx
+
+#kubectl port-forward service/k8dash 9999:80 -n kube-system
