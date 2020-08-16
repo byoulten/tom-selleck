@@ -21,7 +21,7 @@ kubectl get deployment,svc,pods,pvc --all-namespaces
 #when client pod is running, execute (each in their own terminal)
 
 #kubectl port-forward service/client 3000:3000 
-#kubectl port-forward service/server 9000:9000 
+#kubectl port-forward service/server 9000:9000
 #kubectl port-forward service/k8dash 9999:80 -n kube-system
 
 
