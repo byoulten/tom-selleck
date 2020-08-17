@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o deployments
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: database
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o deployments
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: database
+    spec:
+      containers:
+      - env:
+        - name: MONGODB_INITDB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: MONGODB_INITDB_DATABASE
+              name: database--env-prod
+        - name: MONGODB_INITDB_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MONGODB_INITDB_ROOT_PASSWORD
+              name: database--env-prod
+        - name: MONGODB_INITDB_ROOT_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: MONGODB_INITDB_ROOT_USERNAME
+              name: database--env-prod
+        image: byoulten/tom-selleck-database
+        imagePullPolicy: ""
+        name: tom-selleck-database
+        ports:
+        - containerPort: 27107
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

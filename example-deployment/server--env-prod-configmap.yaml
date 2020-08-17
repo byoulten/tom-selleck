@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  AAD_TENANT: na
+  APP_ID: na
+  AUTHORITY_HOST_URL: na
+  CLIENT_SECRET: na
+  DB_NAME: tom-selleck
+  DB_PASSWORD: password
+  DB_USERNAME: admin
+  RESOURCE: na
+  USER_PRINCIPAL_NAME: na
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: server-server--env-prod
+  name: server--env-prod

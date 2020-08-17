@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  MONGODB_INITDB_DATABASE: tom-selleck
+  MONGODB_INITDB_ROOT_PASSWORD: password
+  MONGODB_INITDB_ROOT_USERNAME: admin
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: database-database--env-prod
+  name: database--env-prod

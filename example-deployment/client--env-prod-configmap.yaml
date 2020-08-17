@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  REACT_APP_API_HOSTNAME: localhost
+  REACT_APP_API_PORT: "9000"
+  REACT_APP_API_SCHEME: http
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: client-client--env-prod
+  name: client--env-prod

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o deployments
+    kompose.service.type: NodePort
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: client
+  name: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: client
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o deployments
+        kompose.service.type: NodePort
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: client
+    spec:
+      containers:
+      - env:
+        - name: REACT_APP_API_HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              key: REACT_APP_API_HOSTNAME
+              name: client--env-prod
+        - name: REACT_APP_API_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: REACT_APP_API_PORT
+              name: client--env-prod
+        - name: REACT_APP_API_SCHEME
+          valueFrom:
+            configMapKeyRef:
+              key: REACT_APP_API_SCHEME
+              name: client--env-prod
+        image: byoulten/tom-selleck-client
+        imagePullPolicy: ""
+        name: tom-selleck-client
+        ports:
+        - containerPort: 3000
+        resources: {}
+        stdin: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
