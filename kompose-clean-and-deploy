@@ -3,7 +3,7 @@ kind create cluster
 kubectl cluster-info --context kind-kind
 rm ./deployments/*
 export ENVIRONMENT=prod
-kompose convert -o deployments && kubectl apply -f ./example-deployment
+kompose convert -o deployments && kubectl apply -f ./deployments
 
 #automatically install a dashboard
 kubectl apply -f https://raw.githubusercontent.com/herbrandson/k8dash/master/kubernetes-k8dash.yaml

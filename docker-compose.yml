@@ -9,7 +9,7 @@ services:
         context: ./database
     container_name: tom-selleck-database
     ports: 
-        - '27017:27107'
+        - '27017:27017'
   index:
     env_file:
         - index/.env.${ENVIRONMENT}
