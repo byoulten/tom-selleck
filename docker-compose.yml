@@ -29,6 +29,7 @@ services:
     image: byoulten/tom-selleck-server
     labels:
         kompose.service.type: NodePort
+        kompose.service.nodeport.port: 32323
     build:
         context: ./server
     container_name: tom-selleck-server
@@ -43,6 +44,7 @@ services:
     image: byoulten/tom-selleck-client
     labels:
         kompose.service.type: NodePort
+        kompose.service.nodeport.port: 31313
     build:
         context: './client'
     container_name: tom-selleck-client
