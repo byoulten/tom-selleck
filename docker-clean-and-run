@@ -1,6 +1,9 @@
 cd server
 npm run tsc
 cd ..
+cd daemon
+npm run tsc
+cd ..
 docker stop $(docker ps -aq)
 docker container prune
 docker volume prune

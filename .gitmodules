@@ -1,6 +1,0 @@
-[submodule "server"]
-    path = server
-	url = https://github.com/byoulten/tom-selleck-server.git
-[submodule "client"]
-    path = client
-	url = https://github.com/byoulten/tom-selleck-client.git
