@@ -1,0 +1,72 @@
+.search {
+    button {
+        padding: 12px 10px;
+        width: 30%;
+        border-radius: 4px;
+        background-color: grey;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .results {
+        margin-top: 20px;
+        width: 100%;
+        color: #333;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 4px;
+        margin-left: 18px;
+
+        span {
+            width: 200px;
+            margin-right: 5px;
+            font-size: 18px;
+        }
+
+        a {
+            margin-left: 5px;
+            font-size: 18px;
+        }
+
+        p {
+            border-bottom: #888888;
+        }
+
+        .thumbnail {
+            max-height: 40px;
+        }
+
+        td,
+        th {
+            border: 1px solid transparent; /* No more visible border */
+            height: 55px;
+            transition: all 0.3s; /* Simple transition for hover effect */
+            max-width: 200px;
+            padding: 5px;
+        }
+
+        th {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        td {
+            background: #fafafa;
+            text-align: center;
+        }
+
+        /* Cells in even rows (2,4,6...) are one color */
+        tr:nth-child(even) td {
+            background: #f1f1f1;
+        }
+
+        /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+        tr:nth-child(odd) td {
+            background: #d8d8d8;
+        }
+    }
+}
