@@ -1,0 +1,5 @@
+rm ./deployments/*
+export ENVIRONMENT=prod
+kompose convert -o deployments 
+cd ~/.kube 
+kubectl --kubeconfig="tom-selleck-cluster-kubeconfig.yaml" apply -f ~/Projects/tom-selleck/deployments
