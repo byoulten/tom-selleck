@@ -16,4 +16,4 @@ export type SEARCH = typeof SEARCH;
 export const SET_SEARCH = "SET_SEARCH";
 export type SET_SEARCH = typeof SET_SEARCH;
 
-export const API_URL = process.env.REACT_APP_API_SCHEME + "://" + process.env.REACT_APP_API_HOSTNAME + ":" + process.env.REACT_APP_API_PORT;
+export const API_URL = "/api";

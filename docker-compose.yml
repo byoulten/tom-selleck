@@ -39,9 +39,6 @@ services:
     env_file:
         - server/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-server
-    labels:
-        kompose.service.type: NodePort
-        kompose.service.nodeport.port: 32323
     build:
         context: ./server
     container_name: tom-selleck-server
@@ -54,9 +51,6 @@ services:
     env_file:
         - client/.env.${ENVIRONMENT}
     image: byoulten/tom-selleck-client
-    labels:
-        kompose.service.type: NodePort
-        kompose.service.nodeport.port: 31313
     build:
         context: './client'
     container_name: tom-selleck-client
@@ -65,4 +59,19 @@ services:
     stdin_open: true
     depends_on: 
         - server
-
+  loadbalancer: 
+    env_file:
+        - loadbalancer/.env.${ENVIRONMENT}
+    image: byoulten/tom-selleck-loadbalancer
+    build:
+        context: './loadbalancer'
+    container_name: tom-selleck-loadbalancer
+    labels:
+        kompose.service.type: LoadBalancer
+    ports:
+         - 80:80
+         - 443:443
+    depends_on: 
+        - client
+  
+  

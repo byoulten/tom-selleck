@@ -8,10 +8,12 @@ expressLoader({ expressApp: app })
 
 diLoader({ expressApp: app })
 
+var indexRouter = require('./api/index')
 var filesRouter = require('./api/files')
 var searchRouter = require('./api/search')
 var authRouter = require('./api/auth')
 
+app.use('/', indexRouter)
 app.use('/files', filesRouter);
 app.use('/search', searchRouter);
 app.use('/auth', authRouter);
