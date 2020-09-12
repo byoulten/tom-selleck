@@ -67,11 +67,12 @@ services:
         context: './loadbalancer'
     container_name: tom-selleck-loadbalancer
     labels:
-        kompose.service.type: LoadBalancer
+        kompose.service.type: NodePort
+        kompose.service.nodeport.port: 31313
     ports:
          - 80:80
-         - 443:443
     depends_on: 
         - client
+        - server
   
   

@@ -26,6 +26,9 @@ export default class UserService {
                     if (!user) {
                         resolve({ auth: false, token: null, type: 404 });
                     }
+
+                    console.log(user.password)
+                    console.log(password)
                     
                     // check if the password is valid
                     var passwordIsValid = bcrypt.compareSync(password, user.password);
