@@ -27,11 +27,6 @@ export default class UserService {
                         resolve({ auth: false, token: null, type: 404 });
                     }
                     
-                    console.log(Buffer.from("$2a$10$8IJL9/pIsT1NplDrcqvSB.IUbTRGT6UkpvtJ7LQLrJXDaKCY.G1qC").toString("base64"))
-                    console.log(user.password)
-                    console.log(Buffer.from(user.password, 'base64').toString())
-                    console.log("$2a$10$8IJL9/pIsT1NplDrcqvSB.IUbTRGT6UkpvtJ7LQLrJXDaKCY.G1qC")
-
                     // check if the password is valid
                     var passwordIsValid = bcrypt.compareSync(password, Buffer.from(user.password, 'base64').toString('ascii'));
                     if (!passwordIsValid) {
