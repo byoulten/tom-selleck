@@ -6,11 +6,26 @@ export ENVIRONMENT=prod
 kompose convert -o deployments 
 kubectl apply -f ./deployments
 
-#automatically install a dashboard
+#install an ingress controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+
+#install a dashboard
 kubectl apply -f https://raw.githubusercontent.com/herbrandson/k8dash/master/kubernetes-k8dash.yaml
 
 kubectl create serviceaccount k8dash-sa
 kubectl create clusterrolebinding k8dash-sa --clusterrole=cluster-admin --serviceaccount=default:k8dash-sa
+
+# Check deployment rollout status every 10 seconds (max 10 minutes) until complete.
+ATTEMPTS=0
+ROLLOUT_STATUS_CMD="kubectl rollout status deployment.apps/ingress-nginx-controller -n ingress-nginx"
+until $ROLLOUT_STATUS_CMD || [ $ATTEMPTS -eq 60 ]; do
+  $ROLLOUT_STATUS_CMD
+  ATTEMPTS=$((attempts + 1))
+  sleep 10
+done
+
+#install ingresses
+kubectl apply -f ingresses.yaml
 
 kubectl get deployment,svc,pods,pvc --all-namespaces
 

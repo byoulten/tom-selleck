@@ -3,3 +3,5 @@ export ENVIRONMENT=prod
 kompose convert -o deployments 
 cd ~/.kube 
 kubectl --kubeconfig="tom-selleck-cluster-kubeconfig.yaml" apply -f ~/Projects/tom-selleck/deployments
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.35.0/deploy/static/provider/do/deploy.yaml
+#kubectl --kubeconfig="tom-selleck-cluster-kubeconfig.yaml" apply -f ~/Projects/tom-selleck/ingresses.yaml
