@@ -8,14 +8,13 @@ import { goSearch, updateSearch } from "../../../actions/search";
 
 interface IProps {
     updateSearchConnect: (event) => void;
-    searchConnect: (term, username, token) => void;
+    searchConnect: (term, username) => void;
     term: string;
     rows: any;
-    token: string;
     username: string;
 }
 
-const Search = ({ updateSearchConnect, searchConnect, term, username, token, rows}: IProps) => (
+const Search = ({ updateSearchConnect, searchConnect, term, username, rows}: IProps) => (
     <div className="search">
         
         {!rows || rows.length < 1 ?
@@ -29,7 +28,7 @@ const Search = ({ updateSearchConnect, searchConnect, term, username, token, row
             onChange={updateSearchConnect}
         />
 
-        <button onClick={() => searchConnect(term, username, token)}>Search</button>
+        <button onClick={() => searchConnect(term, username)}>Search</button>
 
         {rows && rows.length > 0 ?
             (<table className="results">
@@ -64,7 +63,6 @@ const mapStateToProps = (state) => {
     return {
         term: state.search.term,
         rows: state.search.rows,
-        token: state.auth.token,
         username: state.login.username
     }
 };

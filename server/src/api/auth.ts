@@ -11,7 +11,8 @@ router.post("/login", async (req, res) => {
 
     await userService.login(req.body.username, req.body.password)
     .then(result => {
-        return res.status(result.type).send({ auth: result.auth, token: result.token });
+        res.cookie('token', result.type, { httpOnly: true });
+        return res.status(result.type).send(result.auth);
     })
     .catch(err => {
         return res.status(401).send(err)

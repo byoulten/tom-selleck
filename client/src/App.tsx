@@ -9,20 +9,18 @@ import Pages from "./routes/Pages";
 import { checkAuthentication } from "./actions/current";
 
 interface IProps {
-  checkAuthenticationConnect: (username, token) => void;
+  checkAuthenticationConnect: (username) => void;
   isAuthenticated: boolean | null;
-  token: string;
   username: string;
 }
 
 const App = ({
   checkAuthenticationConnect,
   isAuthenticated,
-  token,
   username
 }: IProps) => {
   React.useEffect(() => {
-    checkAuthenticationConnect(username, token);
+    checkAuthenticationConnect(username);
   }, []);
 
   const app = isAuthenticated !== null ? (
@@ -42,7 +40,6 @@ const App = ({
 
 const mapStateToProps = (state) => ({
   username: state.login.username,
-  token: state.auth.token,
   isAuthenticated: state.auth.isAuthenticated
 });
 

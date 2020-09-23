@@ -10,6 +10,10 @@ services:
     container_name: tom-selleck-database
     ports: 
         - '27017:27017'
+    deploy:
+        placement: 
+          constraints:
+              - node.labels.beta.kubernetes.io/instance-type == s-1vcpu-2gb
   index:
     env_file:
         - index/.env.${ENVIRONMENT}
@@ -23,6 +27,10 @@ services:
         - "precreate-core tom_selleck_core; exec solr -f"
     ports: 
         - '8983:8983'
+    deploy:
+        placement: 
+            constraints:
+                - node.labels.beta.kubernetes.io/instance-type == s-1vcpu-2gb
   daemon:
       env_file:
           - daemon/.env.${ENVIRONMENT}
@@ -32,6 +40,10 @@ services:
       container_name: tom-selleck-daemon
       ports: 
           - '6660:6660'
+      deploy:
+          placement: 
+            constraints:
+                - node.labels.beta.kubernetes.io/instance-type == s-4vcpu-8gb
       depends_on: 
           - database
           - index
@@ -44,6 +56,10 @@ services:
     container_name: tom-selleck-server
     ports: 
         - '9000:9000'
+    deploy:
+        placement: 
+          constraints:
+              - node.labels.beta.kubernetes.io/instance-type == s-1vcpu-2gb
     depends_on: 
         - database
         - index
@@ -56,27 +72,13 @@ services:
     container_name: tom-selleck-client
     ports: 
         - '3000:3000'
+    deploy:
+        placement: 
+            constraints:
+                - node.labels.beta.kubernetes.io/instance-type == s-1vcpu-2gb
     stdin_open: true
     depends_on: 
         - server
-#   loadbalancer: 
-#     env_file:
-#         - loadbalancer/.env.${ENVIRONMENT}
-#     image: byoulten/tom-selleck-loadbalancer
-#     build:
-#         context: './loadbalancer'
-#     container_name: tom-selleck-loadbalancer
-#     labels:
-#         kompose.service.type: NodePort
-#         kompose.service.nodeport.port: 31313
-#     ports:
-#          - 80:80
-#     depends_on: 
-#         - client
-#         - server
-#   nginx-ingress-controller: 
-#     image: nginx/nginx-ingress
-#     container_name: nginx-ingress-controller
 
   
   

@@ -1,7 +1,6 @@
 export interface ICurrent {
   isAuthenticated: boolean | null;
   uuid: string | null;
-  token: string | null;
 }
 
 export interface ILogin {

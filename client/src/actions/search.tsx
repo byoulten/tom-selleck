@@ -31,14 +31,11 @@ function setSearch(term): ISetSearch {
 
 export type SearchAction = ISearch | ISetSearch;
 
-export function goSearch(term, username, token) {
+export function goSearch(term, username) {
   return async (dispatch: Dispatch<SearchAction, {}, any>) => {
-    axios.post(`${constants.API_URL}/search/go`,
+    axios.post(`/search/go`,
       {
         term: term
-      },
-      {
-        headers: { "x-access-token": token, "username": username }
       })
       .then(response => {
         return response.data
@@ -66,7 +63,7 @@ export function goSearch(term, username, token) {
               highlights: { __html: display },
               subject: doc.subject,
               email: doc.webLink,
-              pdf: constants.API_URL + doc.attachmentUrl
+              pdf: doc.attachmentUrl
             }
 
             return row

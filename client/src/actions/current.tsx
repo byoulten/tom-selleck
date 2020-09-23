@@ -3,16 +3,15 @@ import { ThunkDispatch as Dispatch } from "redux-thunk";
 import * as constants from "../constants";
 import axios from "axios"
 import { runInThisContext } from "vm";
+import cookies from "js-cookie"
 
 export interface IAuthenticate {
   type: constants.AUTHENTICATE;
-  token: string;
 }
 
-function authenticate(token): IAuthenticate {
+function authenticate(): IAuthenticate {
   return {
-    type: constants.AUTHENTICATE,
-    token: token
+    type: constants.AUTHENTICATE
   };
 }
 
@@ -30,15 +29,17 @@ export type AuthenticationAction = IAuthenticate | IUnauthenticate;
 
 export function logIn(username, password) {
   return async (dispatch: Dispatch<IAuthenticate, {}, any>) => {
-    await axios.post(constants.API_URL + "/auth/login",
+    await axios.post("/auth/login",
       {
         username: username,
         password: password
       })
       .then(async (res) => {
-        if (res.status == 200 && res.data.token) {
-          await window.localStorage.setItem("authenticated", "true");
-          dispatch(authenticate(res.data.token));
+        if (res.status == 200 && res.data.auth) {
+          await window.localStorage.setItem("authenticated", res.data.auth);
+          dispatch(authenticate());
+        } else {
+          await window.localStorage.setItem("authenticated", "false");
         }
       })
       .catch(err => {
@@ -54,21 +55,17 @@ export function logOut() {
   };
 }
 
-export function checkAuthentication(username, token) {
+export function checkAuthentication(username) {
   return async (dispatch: Dispatch<AuthenticationAction, {}, any>) => {
-    await axios.post(constants.API_URL + "/auth/me",
+    await axios.post("/auth/me",
       {
         username: username
-      }, {
-        headers: {
-          "x-access-token": `${token}` 
-        }
       })
       .then(async (res) => {
         console.log(res)
         if (res.status == 200 && res.data.id && res.data.auth) {
           await window.localStorage.setItem("authenticated", "true");
-          dispatch(authenticate(token))
+          dispatch(authenticate())
         } else {
           await window.localStorage.setItem("authenticated", "false");
           dispatch(unauthenticate())

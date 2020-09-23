@@ -3,7 +3,7 @@ import UserService from "../services/userService";
 
 async function verify(req, res, next) {
 
-    var token = req.headers["x-access-token"];
+    var token = req.cookies.token
     var username = req.headers["username"];
 
     var userService = Container.get(UserService)

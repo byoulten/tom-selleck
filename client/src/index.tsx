@@ -6,10 +6,8 @@ import thunkMiddleware from "redux-thunk-recursion-detect";
 
 import "./index.scss";
 import App from "./App";
-import currentReducer from "./reducers/current";
 import loginReducer from "./reducers/login";
 import * as serviceWorker from "./serviceWorker";
-import { ICurrent } from "./types";
 import authReducer from "./reducers/current";
 import searchRedcuer from "./reducers/search";
 
