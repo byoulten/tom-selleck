@@ -79,6 +79,16 @@ services:
     stdin_open: true
     depends_on: 
         - server
+  proxy:
+    image: proxy
+    build:
+        context: './proxy'
+    container_name: proxy
+    ports: 
+        - '8080:80'
+    depends_on: 
+        - client
+        - server
 
   
   

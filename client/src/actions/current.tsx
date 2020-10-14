@@ -2,8 +2,6 @@ import { ThunkDispatch as Dispatch } from "redux-thunk";
 
 import * as constants from "../constants";
 import axios from "axios"
-import { runInThisContext } from "vm";
-import cookies from "js-cookie"
 
 export interface IAuthenticate {
   type: constants.AUTHENTICATE;
@@ -29,7 +27,7 @@ export type AuthenticationAction = IAuthenticate | IUnauthenticate;
 
 export function logIn(username, password) {
   return async (dispatch: Dispatch<IAuthenticate, {}, any>) => {
-    await axios.post("/auth/login",
+    await axios.post(process.env.REACT_APP_LOGIN_ENDPOINT,
       {
         username: username,
         password: password
@@ -57,11 +55,8 @@ export function logOut() {
 
 export function checkAuthentication(username) {
   return async (dispatch: Dispatch<AuthenticationAction, {}, any>) => {
-    await axios.post("/auth/me",
-      {
-        username: username
-      })
-      .then(async (res) => {
+    await axios.post(process.env.REACT_APP_AUTH_ENDPOINT, { username: username }, { withCredentials: true })
+    .then(async (res) => {
         console.log(res)
         if (res.status == 200 && res.data.id && res.data.auth) {
           await window.localStorage.setItem("authenticated", "true");

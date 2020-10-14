@@ -1,0 +1,10 @@
+#rid the old deployment scripts
+rm ./deployments/*
+
+#run kompose to create the scripts
+kompose convert -o deployments 
+
+#remove anything only meant to run locally
+rm ./deployments/localonly-*
+
+

@@ -18,6 +18,11 @@ export default class UserService {
         }
     }
 
+    generateEncryptedPassword(password: string) {
+        const hash = bcrypt.hashSync(password, 10);
+        return Buffer.from(hash).toString('base64');
+    }
+
     login(username: string, password: string): Promise<{ auth: boolean, token: string | null, type: number }> {
         return new Promise((resolve, reject) => {
             this.userRepository.getUserByUsername(username)
@@ -26,9 +31,10 @@ export default class UserService {
                     if (!user) {
                         resolve({ auth: false, token: null, type: 404 });
                     }
-                    
+
                     // check if the password is valid
                     var passwordIsValid = bcrypt.compareSync(password, Buffer.from(user.password, 'base64').toString('ascii'));
+
                     if (!passwordIsValid) {
                         resolve({ auth: false, token: null, type: 401 });
                     }

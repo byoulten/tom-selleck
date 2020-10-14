@@ -4,7 +4,7 @@ export default interface ISolrModel {
     subject: string
     recievedDateTime: Date
     attachmentThumbnail: string
-    attachmentUrl: string
+    attachmentId: string
     scrapeConfidence: number
     scrapeData: string
 }

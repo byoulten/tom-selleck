@@ -60,7 +60,6 @@ const Nav = ({ isAuthenticated, uuid }: IProps) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return { 
     uuid: state.auth.uuid,
     isAuthenticated: state.auth.isAuthenticated 

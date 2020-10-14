@@ -64,9 +64,6 @@ export default class TokenService {
                 }
             })
         } else {
-            console.log("current time - " + Date.now())
-            console.log("saved expiry - " + this.expiryDate)
-
             callback(null, this.token)
         }
     }

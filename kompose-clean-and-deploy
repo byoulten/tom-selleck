@@ -1,9 +1,12 @@
 kind delete cluster
 kind create cluster --config kind-config.yaml
 kubectl cluster-info --context kind-kind
-rm ./deployments/*
+
+#set the env for the vars
 export ENVIRONMENT=prod
-kompose convert -o deployments 
+
+bash kompose-generate-scripts
+
 kubectl apply -f ./deployments
 
 #install an ingress controller

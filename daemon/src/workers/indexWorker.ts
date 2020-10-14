@@ -38,7 +38,7 @@ parentPort.on("message", async (sleepOffset) => {
                                 subject: "",
                                 recievedDateTime: new Date(Date.now()),
                                 attachmentThumbnail: "",
-                                attachmentUrl: "",
+                                attachmentId: "",
                                 scrapeConfidence: 0,
                                 scrapeData: ""                            
                             }
@@ -60,7 +60,7 @@ parentPort.on("message", async (sleepOffset) => {
                                                 solrDoc.webLink = emailLog.apiResponseWebLink
                                                 solrDoc.recievedDateTime = new Date(emailLog.apiResponseRecievedDateTime)
                                                 solrDoc.attachmentThumbnail = "./demo-thumbnail.png"
-                                                solrDoc.attachmentUrl = "/files/pdf?id=" + scrapeJob.id.toString()
+                                                solrDoc.attachmentId = scrapeJob.id.toString()
     
                                                 indexService.addDocumentToSolrIndex(solrDoc).then(saved => {
                                                     if (saved) {

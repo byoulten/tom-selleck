@@ -33,10 +33,7 @@ export type SearchAction = ISearch | ISetSearch;
 
 export function goSearch(term, username) {
   return async (dispatch: Dispatch<SearchAction, {}, any>) => {
-    axios.post(`/search/go`,
-      {
-        term: term
-      })
+    axios.post(process.env.REACT_APP_SEARCH_ENDPOINT, { term: term }, { withCredentials: true })
       .then(response => {
         return response.data
       })
@@ -63,8 +60,10 @@ export function goSearch(term, username) {
               highlights: { __html: display },
               subject: doc.subject,
               email: doc.webLink,
-              pdf: doc.attachmentUrl
+              pdf: process.env.REACT_APP_FILES_ENDPOINT + "?id=" + doc.attachmentId
             }
+
+            console.log(row.pdf)
 
             return row
           })
@@ -78,7 +77,6 @@ export function goSearch(term, username) {
 
 export function updateSearch(event) {
   return async (dispatch: Dispatch<SearchAction, {}, any>) => {
-    console.log(event.target.value)
     dispatch(setSearch(event.target.value));
   };
 }

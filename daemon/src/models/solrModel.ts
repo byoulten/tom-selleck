@@ -7,7 +7,7 @@ export default class SolrModel implements ISolrModel {
     subject: string;
     recievedDateTime: Date;
     attachmentThumbnail: string;
-    attachmentUrl: string;
+    attachmentId: string;
     scrapeConfidence: number;
     scrapeData: string;
 
@@ -15,8 +15,8 @@ export default class SolrModel implements ISolrModel {
         webLink:string, 
         subject:string, 
         recievedDateTime: Date, 
-        attachementThumbnail:string, 
-        attachmentUrl:string, 
+        attachmentThumbnail:string, 
+        attachmentId:string, 
         scrapeConfidence:number, 
         scrapeData:string) {
 
@@ -24,8 +24,8 @@ export default class SolrModel implements ISolrModel {
             this.webLink = webLink
             this.subject = subject
             this.recievedDateTime = recievedDateTime
-            this.attachmentThumbnail = attachementThumbnail
-            this.attachmentUrl = attachmentUrl
+            this.attachmentThumbnail = attachmentThumbnail
+            this.attachmentId = attachmentId
             this.scrapeConfidence = scrapeConfidence
             this.scrapeData = scrapeData
     }
