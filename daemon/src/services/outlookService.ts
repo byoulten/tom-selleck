@@ -73,7 +73,7 @@ export default class OutlookService {
                     .orderby("hasAttachments, createdDateTime DESC")
                     .select("id, receivedDateTime, subject, webLink")
                     .filter("hasAttachments eq true and createdDateTime ge 1900-01-01T00:00:00Z")
-                    .expand("attachments($select=id)")
+                    .expand("attachments($select=id,contentType,size)")
                     .top(top)
                     .get()
                     .then(async res => {
@@ -86,7 +86,15 @@ export default class OutlookService {
                                 apiResponseSubject: obj.subject,
                                 apiResponseWebLink: obj.webLink,
                                 apiResponseRecievedDateTime: obj.receivedDateTime,
-                                apiResponseAttachmentIds: obj.attachments.map(att => att.id)
+                                apiResponseAttachmentIds: obj.attachments.map(att => {
+
+                                //filter on files type and size
+                                if (process.env.ATTACHMENT_FILE_TYPES?.split("|").includes(att.contentType) && 
+                                    att.size < Number(process.env.ATTACHMENT_MAX_SIZE)) { 
+                                   return att.id
+                                }
+
+                                }).filter(id => id)
                             }
 
                             return email
@@ -139,6 +147,7 @@ export default class OutlookService {
                 })
 
                 client.api(attQuery)
+                    .filter("")
                     .get()
                     .then(res => {
 

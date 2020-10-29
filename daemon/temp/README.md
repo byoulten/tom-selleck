@@ -1,1 +1,1 @@
-Folder used for temporary PDF storage
+Folder used for temporary PDF/image/scrape result storage

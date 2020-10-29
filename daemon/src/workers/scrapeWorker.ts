@@ -42,17 +42,18 @@ parentPort.on("message", async (sleepOffset: number) => {
 
                 const start = Date.now()
                 console.log("started scrape")
-                const scrape = await imageService.scrapeBase64ImageWithWorker(job.pageBytes)
+                const scrapeJS = await imageService.scrapeBase64ImageWithWorker(job.pageBytes)
+                const scrapeCMD = await imageService.scrapeBase64ImageUsingCmd(job.pageBytes)
                 console.log("finished scrape")
                 const end = Date.now()
 
                 console.log("scrape time - " + (Math.abs(end - start) / 1000) + " seconds")
 
-                job.scrapeData = scrape.scrapeData
-                job.scrapeConfidence = scrape.scrapeConfidence
-                job.scrapeTsv = scrape.scrapeTsv
-                job.scrapeHocr = scrape.scrapeHocr
-                job.scrapePdf = scrape.scrapePdf
+                job.scrapeData = scrapeJS.scrapeData + " <-----------> " + scrapeCMD.scrapeData
+                job.scrapeConfidence = scrapeJS.scrapeConfidence
+                job.scrapeTsv = scrapeJS.scrapeTsv
+                job.scrapeHocr = scrapeJS.scrapeHocr
+                job.scrapePdf = scrapeJS.scrapePdf
 
                 createIndexJob(job.id)
 
