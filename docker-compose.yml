@@ -79,7 +79,7 @@ services:
     stdin_open: true
     depends_on: 
         - server
-  proxy:
+  localonly-proxy:
     image: proxy
     build:
         context: './proxy'
