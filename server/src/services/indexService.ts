@@ -49,13 +49,33 @@ export default class IndexService {
     }
 
     private buildSolrQueryFromString(str: string): string {
-        var queries = [Constants.SEARCH_FIELD + ":" + str + "^100", Constants.SEARCH_FIELD + ":\"" + str + "\"~2^80"]
+        
         var tokenized = str.split(" ")
+        var queries = [Constants.SEARCH_FIELD + ":" + str + "^100"]
 
-        if (tokenized.length > 0) {
-            tokenized.map(term => {
-                queries.push(Constants.SEARCH_FIELD + ":" + term + "~2^" + (100 / tokenized.length).toFixed(2))
-            })
+        if (str.length > 2) {
+            //for 3, we need to adjust the initial query
+            if (str.length == 3) { 
+                queries.push(Constants.SEARCH_FIELD + ":\"" + str + "\"~1^80")
+            }else{
+                queries.push(Constants.SEARCH_FIELD + ":\"" + str + "\"~2^80")
+            }
+
+            //only do a tokenized query if we have more than 1 word
+            if (tokenized.length > 1) {
+                
+                tokenized.map(term => {
+                    if (term.length > 2) {
+                        if (term.length == 3) { 
+                            queries.push(Constants.SEARCH_FIELD + ":" + term + "~1^" + (100 / tokenized.length).toFixed(2))
+                        }else{
+                            queries.push(Constants.SEARCH_FIELD + ":" + term + "~2^" + (100 / tokenized.length).toFixed(2))
+                        }
+                    } else {
+                        queries.push(Constants.SEARCH_FIELD + ":" + term + "^" + (100 / tokenized.length).toFixed(2))
+                    }
+                })
+            }
         }
 
         return queries.join(" ")
