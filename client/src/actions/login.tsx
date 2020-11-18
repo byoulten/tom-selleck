@@ -12,30 +12,46 @@ export interface ISetPassword {
   text: string
 }
 
-function username(text: string): ISetUsername {
+export interface IClearPassword {
+  type: constants.CLEAR_PASSWORD
+}
+
+function un(text: string): ISetUsername {
   return {
     type: constants.SET_USERNAME,
     text: text
   };
 }
 
-function password(text: string): ISetPassword {
+function pw(text: string): ISetPassword {
   return {
     type: constants.SET_PASSWORD,
     text: text
   };
 }
 
-export type LoginAction = ISetUsername | ISetPassword;
+function clearPw(): IClearPassword {
+  return {
+    type: constants.CLEAR_PASSWORD
+  };
+}
+
+export type LoginAction = ISetUsername | ISetPassword | IClearPassword;
 
 export function setUsername(event) {
   return async (dispatch: Dispatch<LoginAction, {}, any>) => {
-    dispatch(username(event.target.value));
+    dispatch(un(event.target.value));
   };
 }
 
 export function setPassword(event) {
   return async (dispatch: Dispatch<LoginAction, {}, any>) => {
-    dispatch(password(event.target.value));
+    dispatch(pw(event.target.value));
+  };
+}
+
+export function clearPassword() {
+  return async (dispatch: Dispatch<LoginAction, {}, any>) => {
+    dispatch(clearPw());
   };
 }

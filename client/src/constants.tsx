@@ -10,6 +10,9 @@ export type SET_USERNAME = typeof SET_USERNAME;
 export const SET_PASSWORD = "SET_PASSWORD";
 export type SET_PASSWORD = typeof SET_PASSWORD;
 
+export const CLEAR_PASSWORD = "CLEAR_PASSWORD";
+export type CLEAR_PASSWORD = typeof CLEAR_PASSWORD;
+
 export const SEARCH = "SEARCH";
 export type SEARCH = typeof SEARCH;
 

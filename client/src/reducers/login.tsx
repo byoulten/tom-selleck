@@ -1,5 +1,5 @@
 import { LoginAction } from "../actions/login";
-import { SET_USERNAME, SET_PASSWORD } from "../constants";
+import { SET_USERNAME, SET_PASSWORD, CLEAR_PASSWORD } from "../constants";
 import { ILogin } from "../types";
 
 export default function loginReducer(
@@ -14,6 +14,8 @@ export default function loginReducer(
             return { ...state, username: action.text } 
         case SET_PASSWORD:
             return { ...state, password: action.text } 
+        case CLEAR_PASSWORD:
+            return { ...state, password: '' } 
     }
 
     return state

@@ -2,6 +2,7 @@ import { ThunkDispatch as Dispatch } from "redux-thunk";
 
 import * as constants from "../constants";
 import axios from "axios"
+import { clearPassword } from "./login";
 
 export interface IAuthenticate {
   type: constants.AUTHENTICATE;
@@ -35,6 +36,7 @@ export function logIn(username, password) {
       .then(async (res) => {
         if (res.status == 200 && res.data.auth) {
           await window.localStorage.setItem("authenticated", res.data.auth);
+          dispatch(clearPassword())
           dispatch(authenticate());
         } else {
           await window.localStorage.setItem("authenticated", "false");
